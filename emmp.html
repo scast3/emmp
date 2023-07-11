@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>EMMP Tool</title>
-    <style>
-      /* CSS styles go here */
-      .row {
-        margin-bottom: 10px;
-      }
-      .output {
-        /* Default color for the output values */
-        color: black;
-      }
-      .output-red {
-        /* Color for red output values */
-        color: red;
-      }
-      .output-blue {
-        /* Color for blue output values */
-        color: blue;
-      }
-    </style>
-    <script src="pumpcalc.js"></script>
-  </head>
 
-  <body>
-    <h1>Pump Replacement</h1>
-    <h2>Old Pump</h2>
+<head>
+  <meta charset="UTF-8" />
+  <title>EMMP Tool</title>
+  <style>
+    /* CSS styles go here */
+    .row {
+      margin-bottom: 10px;
+    }
+
+    .output {
+      /* Default color for the output values */
+      color: black;
+    }
+
+    .output-red {
+      /* Color for red output values */
+      color: red;
+    }
+
+    .output-blue {
+      /* Color for blue output values */
+      color: blue;
+    }
+    .new{
+      margin-left: 100px;
+      margin-top: 100px;
+    }
+
+
+  </style>
+  <script src="pumpcalc.js"></script>
+</head>
+
+<body>
+  <h1>Pump Replacement</h1>
+  <h2>Old Pump</h2>
+  <div class="old"> <!-- Need Old and New classes -->
 
     <div class="row">
       <label for="inputNumber1">Enter Flow Capacity (GPM) :</label>
@@ -55,15 +66,51 @@
       <button onclick="performCalculation(4)">Calculate</button>
       <p id="outputNumber4" class="output"></p>
     </div>
-    <script>
-      function performCalculation(rowNumber) {
-        var inputId = "inputNumber" + rowNumber;
-        var outputId = "outputNumber" + rowNumber;
+  </div>
+  <div class = "new">
+    <h2>New Pump</h2>
+    <div class="row">
+      <label for="inputNumber1">Enter Flow Capacity (GPM) :</label>
+      <input type="number" id="inputNumber1" />
+      <button onclick="performCalculation(1)">Calculate</button>
+      <p id="outputNumber1" class="output-red"></p>
+    </div>
 
-        var userInput = document.getElementById(inputId).value;
-        var result = pumpcalc(userInput);
-        document.getElementById(outputId).textContent = result;
-      }
-    </script>
-  </body>
+    <div class="row">
+      <label for="inputNumber2">Enter speed (RPM):</label>
+      <input type="number" id="inputNumber2" />
+      <button onclick="performCalculation(2)">Calculate</button>
+      <p id="outputNumber2" class="output"></p>
+    </div>
+
+    <div class="row">
+      <label for="inputNumber3">Enter total head (ft):</label>
+      <input type="number" id="inputNumber3" />
+      <button onclick="performCalculation(3)">Calculate</button>
+      <p id="outputNumber3" class="output"></p>
+    </div>
+
+    <div class="row">
+      <label for="inputNumber4">Enter efficiency (%):</label>
+      <input type="number" id="inputNumber4" />
+      <button onclick="performCalculation(4)">Calculate</button>
+      <p id="outputNumber4" class="output"></p>
+    </div>
+
+
+  </div>
+
+
+  <script>
+    function performCalculation(rowNumber) {
+      var inputId = "inputNumber" + rowNumber;
+      var outputId = "outputNumber" + rowNumber;
+
+      var userInput = document.getElementById(inputId).value;
+      var result = pumpcalc(userInput);
+      document.getElementById(outputId).textContent = result;
+    }
+  </script>
+</body>
+
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Python Function Demo</title>
+    <script>
+      function callPythonFunction() {
+        var userInput = document.getElementById("inputNumber").value;
+
+        // Send a POST request to the server
+        fetch("/process", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ number: userInput }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Update the output element with the result from the server
+            document.getElementById("outputNumber").textContent = data.result;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Python Function Demo</h1>
+    <label for="inputNumber">Enter a number:</label>
+    <input type="number" id="inputNumber" />
+    <button onclick="callPythonFunction()">Process</button>
+    <p id="outputNumber"></p>
+  </body>
+</html>

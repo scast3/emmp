@@ -24,30 +24,38 @@
       /* Color for blue output values */
       color: blue;
     }
+
     .old,
-        .new {
-            float: left;
-            width: 50%; /* Adjust width as needed */
-        }
-        .clear {
-            clear: both;
-        }
+    .new {
+      float: left;
+      width: 50%;
+      /* Adjust width as needed */
+    }
 
+    .clear {
+      clear: both;
+    }
 
+    .Results {
+      margin-top: 300px;
+    }
+    h1{
+      text-align: center;
+    }
   </style>
   <script src="pumpcalc.js"></script>
 </head>
 
 <body>
   <h1>Pump Replacement</h1>
-  
+
   <div class="old"> <!-- Need Old and New classes -->
     <h2>Old Pump</h2>
     <div class="row">
       <label for="inputNumber1">Enter Flow Capacity (GPM) :</label>
       <input type="number" id="inputNumber1" />
       <button onclick="performCalculation(1)">Calculate</button>
-      <p id="outputNumber1" class="output-red"></p>
+      <p id="outputNumber1" class="output"></p>
     </div>
 
     <div class="row">
@@ -71,7 +79,7 @@
       <p id="outputNumber4" class="output"></p>
     </div>
   </div>
-  <div class = "new">
+  <div class="new">
     <h2>New Pump</h2>
     <div class="row">
       <label for="inputNumber1">Enter Flow Capacity (GPM) :</label>
@@ -103,7 +111,9 @@
 
 
   </div>
-
+  <div class="Results">
+    <h1>Results</h1>
+  </div>
 
   <script>
     function performCalculation(rowNumber) {

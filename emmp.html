@@ -2,35 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Python Function Demo</title>
-    <script>
-      function callPythonFunction() {
-        var userInput = document.getElementById("inputNumber").value;
-
-        // Send a POST request to the server
-        fetch("/process", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ number: userInput }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            // Update the output element with the result from the server
-            document.getElementById("outputNumber").textContent = data.result;
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+    <title>EMMP Tool</title>
+    <style>
+      body {
+        background-color: rgb(4, 47, 20);
       }
-    </script>
+      h1 {
+        color: aliceblue;
+      }
+      label {
+        color: aliceblue;
+      }
+    </style>
   </head>
   <body>
-    <h1>Python Function Demo</h1>
-    <label for="inputNumber">Enter a number:</label>
+    <h1>Pump Replacement Specs</h1>
+
+    <label for="Q">Flow Capacity</label>
+
     <input type="number" id="inputNumber" />
-    <button onclick="callPythonFunction()">Process</button>
+    <button onclick="calculate()">Calculate</button>
     <p id="outputNumber"></p>
+
+    <script>
+      function calculate() {
+        var userInput = document.getElementById("inputNumber").value;
+        var result = pumpcalc(userInput);
+        document.getElementById("outputNumber").textContent = result;
+      }
+
+      function pumpcalc(inputNumber) {
+        // Replace with your own JavaScript algorithm
+        // Modify this function to perform the desired calculations
+        // Example: Multiply the input number by 2
+        return inputNumber * 2;
+      }
+    </script>
   </body>
 </html>

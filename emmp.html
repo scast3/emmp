@@ -116,7 +116,7 @@
 
   </div>
 
-  <button class="calcbutton" onclick="performCalculation(
+  <button class="calcbutton" onclick="power(
     document.getElementById('old_Q').value,
     document.getElementById('old_w').value,
     document.getElementById('old_h').value,
@@ -131,7 +131,7 @@
 
   <div class="Results">
     <h1>Results</h1>
-    <p>Change in Energy (kWh):</p>
+    <p id = "calcbutton">Change in Energy (kWh):</p>
     <p>Change in Energy Costs ($):</p>
 
   </div>
@@ -142,7 +142,7 @@
       var outputId = "outputNumber" + rowNumber;
 
       var userInput = document.getElementById(inputId).value;
-      var result = pumpcalc(userInput);
+      var result = power(userInput);
       document.getElementById(outputId).textContent = result;
     }
   </script>

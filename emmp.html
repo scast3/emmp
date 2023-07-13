@@ -5,10 +5,10 @@
   <meta charset="UTF-8" />
   <title>EMMP Tool</title>
   <style>
-    /* CSS styles go here */
-    body{
+    body {
       text-align: center;
     }
+
     .row {
       display: flex;
       align-items: center;
@@ -48,11 +48,13 @@
     h1 {
       text-align: center;
     }
-    h2{
+
+    h2 {
       margin-left: 10px;
       text-align: left;
     }
-    .calcbutton{
+
+    .calcbutton {
       margin-top: 20px;
       align-items: center;
       padding: 20px 40px;
@@ -69,7 +71,7 @@
 <body>
   <h1>Pump Replacement</h1>
 
-  <div class="old"> <!-- Need Old and New classes -->
+  <div class="old">
     <h2>Old Pump</h2>
     <div class="row">
       <label for="old_Q">Enter Capacity (GPM) :</label>
@@ -116,36 +118,42 @@
 
   </div>
 
-  <button class="calcbutton" onclick="power(
-    document.getElementById('old_Q').value,
-    document.getElementById('old_w').value,
-    document.getElementById('old_h').value,
-    document.getElementById('old_n').value,
-    document.getElementById('new_Q').value,
-    document.getElementById('new_w').value,
-    document.getElementById('new_h').value,
-    document.getElementById('new_n').value
-    )">Calculate
+  <button class="calcbutton" onclick="performCalculation(); console.log('logged');">Calculate
   </button>
 
 
+
+
+  <script>
+    function performCalculation() {
+      var old_Q = parseFloat(document.getElementById('old_Q').value);
+      var old_w = parseFloat(document.getElementById('old_w').value);
+      var old_h = parseFloat(document.getElementById('old_h').value);
+      var old_n = parseFloat(document.getElementById('old_n').value);
+      var new_Q = parseFloat(document.getElementById('new_Q').value);
+      var new_w = parseFloat(document.getElementById('new_w').value);
+      var new_h = parseFloat(document.getElementById('new_h').value);
+      var new_n = parseFloat(document.getElementById('new_n').value);
+
+
+      var power_result = power(old_Q, old_w, old_h, old_n, new_Q, new_w, new_h, new_n);
+      var cost_result = costs();
+      // Update the content of the <p> element with the id "result" to display the result
+      document.getElementById("power_result").textContent = "Change in Energy (kWh): " + power_result;
+      document.getElementById("cost_result").textContent = "Change in Energy Costs ($): " + cost_result
+      // Use the result variable as needed
+      console.log(result); // Example: Log the result to the console
+      // Or perform other operations with the result variable
+      // ...
+    }
+  </script>
   <div class="Results">
     <h1>Results</h1>
-    <p id = "calcbutton">Change in Energy (kWh):</p>
-    <p>Change in Energy Costs ($):</p>
+    <p id="power_result">Change in Energy (kWh):</p>
+    <p id="cost_result">Change in Energy Costs ($):</p>
 
   </div>
 
-  <script>
-    function performCalculation(rowNumber) {
-      var inputId = "inputNumber" + rowNumber;
-      var outputId = "outputNumber" + rowNumber;
-
-      var userInput = document.getElementById(inputId).value;
-      var result = power(userInput);
-      document.getElementById(outputId).textContent = result;
-    }
-  </script>
 </body>
 
 </html>

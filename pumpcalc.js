@@ -3,10 +3,10 @@ function power(flow1,speed1,head1,efficiency1,flow2,speed2,head2,efficiency2){
     const g = 32.2; // Acceleration due to gravity in ft/s²
   
     // Calculate power for Pump 1
-    const power1 = (flow1 * head1 * density * g) / (550 * efficiency1 * Math.pow(speed1, 3));
+    const power1 = (flow1 * head1 * density * g) / (550 * efficiency1);
   
     // Calculate power for Pump 2
-    const power2 = (flow2 * head2 * density * g) / (550 * efficiency2 * Math.pow(speed2, 3));
+    const power2 = (flow2 * head2 * density * g) / (550 * efficiency2);
   
     // Calculate the difference in power
     const powerDifference = power2 - power1;

@@ -66,7 +66,18 @@
       cursor: pointer;
     }
   </style>
+  <script src="export.js"></script>
+
+  <!-- Calculation JS file -->
   <script src="pumpcalc.js"></script>
+  
+  <!-- PDFMake -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+
+  <!-- XLSX -->
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
 </head>
 
 <body>
@@ -140,7 +151,7 @@
       var power_result = power(old_Q, old_w, old_h, old_n, new_Q, new_w, new_h, new_n);
       var cost_result = costs();
       // Update the content of the <p> element with the id "result" to display the result
-      document.getElementById("power_result").textContent = "Change in Energy (kWh): " + power_result;
+      document.getElementById("power_result").textContent = "Change in Power (hp): " + power_result;
       document.getElementById("cost_result").textContent = "Change in Energy Costs ($): " + cost_result
       // Use the result variable as needed
       console.log(result); // Example: Log the result to the console
@@ -150,13 +161,13 @@
   </script>
   <div class="Results">
     <h1>Results</h1>
-    <p id="power_result">Change in Energy (kWh):</p>
+    <p id="power_result">Change in Power (hp):</p>
     <p id="cost_result">Change in Energy Costs ($):</p>
 
   </div>
   <button id="exportPdfBtn">Export to PDF</button>
   <button id="exportExcelBtn">Export to Excel</button>
-  
+
 </body>
 
 </html>

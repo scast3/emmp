@@ -66,11 +66,12 @@
       cursor: pointer;
     }
   </style>
-  <script src="export.js"></script>
+  <!-- <script src="export.js"></script> -->
+
 
   <!-- Calculation JS file -->
   <script src="pumpcalc.js"></script>
-  
+
   <!-- PDFMake -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
@@ -91,8 +92,8 @@
     </div>
 
     <div class="row">
-      <label for="old_w">Enter speed (RPM):</label>
-      <input type="number" id="old_w" />
+      <label for="old_runtime">Enter runtime (hours):</label>
+      <input type="number" id="old_runtime" />
     </div>
 
     <div class="row">
@@ -113,8 +114,8 @@
     </div>
 
     <div class="row">
-      <label for="new_w">Enter speed (RPM):</label>
-      <input type="number" id="new_w" />
+      <label for="new_runtime">Enter runtime (hours):</label>
+      <input type="number" id="new_runtime" />
     </div>
 
     <div class="row">
@@ -139,29 +140,63 @@
   <script>
     function performCalculation() {
       var old_Q = parseFloat(document.getElementById('old_Q').value);
-      var old_w = parseFloat(document.getElementById('old_w').value);
+      var old_w = parseFloat(document.getElementById('old_runtime').value);
       var old_h = parseFloat(document.getElementById('old_h').value);
       var old_n = parseFloat(document.getElementById('old_n').value);
       var new_Q = parseFloat(document.getElementById('new_Q').value);
-      var new_w = parseFloat(document.getElementById('new_w').value);
+      var new_w = parseFloat(document.getElementById('new_runtime').value);
       var new_h = parseFloat(document.getElementById('new_h').value);
       var new_n = parseFloat(document.getElementById('new_n').value);
 
+      var cost_result = costs(1, 1);
+      var power1 = power(old_Q,old_h,old_n)
+      var power2 = power(new_Q,new_h,new_n)
+      var power_difference = powerdif(old_Q, old_h, old_n, new_Q, new_h, new_n);
 
-      var power_result = power(old_Q, old_w, old_h, old_n, new_Q, new_w, new_h, new_n);
-      var cost_result = costs();
+
       // Update the content of the <p> element with the id "result" to display the result
-      document.getElementById("power_result").textContent = "Change in Power (hp): " + power_result;
-      document.getElementById("cost_result").textContent = "Change in Energy Costs ($): " + cost_result
+      document.getElementById("power1").textContent = "Old Pump Power (hp): "+ power1;
+      document.getElementById("power2").textContent = "New Pump Power (hp): "+ power2;
+      document.getElementById("power_difference").textContent = "Change in Power (hp): " + power_difference;
+      document.getElementById("cost_result").textContent = "Change in Energy Costs ($): " + cost_result;
       // Use the result variable as needed
-      console.log(result); // Example: Log the result to the console
+      
       // Or perform other operations with the result variable
       // ...
     }
+    document.getElementById("exportPdfBtn").addEventListener("click", function () {
+      // Generate PDF content
+      var pdfContent = {
+        content: [
+          'Your PDF content goes here'
+        ]
+      };
+
+      // Generate and download the PDF
+      pdfmake.createPdf(pdfContent).download("exported_data.pdf");
+    });
+
+    document.getElementById("exportExcelBtn").addEventListener("click", function () {
+      // Generate Excel data
+      var excelData = [
+        ['Header 1', 'Header 2'],
+        ['Value 1', 'Value 2']
+      ];
+
+      var worksheet = XLSX.utils.aoa_to_sheet(excelData);
+      var workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+      // Generate and download the Excel file
+      var excelFile = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      saveAs(new Blob([excelFile], { type: 'application/octet-stream' }), 'exported_data.xlsx');
+    });
   </script>
   <div class="Results">
     <h1>Results</h1>
-    <p id="power_result">Change in Power (hp):</p>
+    <p id="power1">Old Pump Power (hp):</p>
+    <p id="power2">New Pump Power (hp):</p>
+    <p id="power_difference">Change in Power (hp):</p>
     <p id="cost_result">Change in Energy Costs ($):</p>
 
   </div>

@@ -20,6 +20,8 @@ function powerdif(flow1, head1, efficiency1, flow2, head2, efficiency2) {
     return powerDifference;
 }
 
-function costs(power1,power2){
+function costs(power,runtime){
+    
     return 1;
 }
+

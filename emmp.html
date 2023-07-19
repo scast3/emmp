@@ -43,7 +43,7 @@
 
     .Results {
       margin-top: 10px;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
     }
 
     h1 {
@@ -56,7 +56,7 @@
     }
 
     .calcbutton {
-      margin-top: 20px;
+      margin-top: 10px;
       align-items: center;
       padding: 20px 40px;
       font-size: 24px;
@@ -140,27 +140,32 @@
   <script>
     function performCalculation() {
       var old_Q = parseFloat(document.getElementById('old_Q').value);
-      var old_w = parseFloat(document.getElementById('old_runtime').value);
+      var old_runtime = parseFloat(document.getElementById('old_runtime').value);
       var old_h = parseFloat(document.getElementById('old_h').value);
       var old_n = parseFloat(document.getElementById('old_n').value);
       var new_Q = parseFloat(document.getElementById('new_Q').value);
-      var new_w = parseFloat(document.getElementById('new_runtime').value);
+      var new_runtime = parseFloat(document.getElementById('new_runtime').value);
       var new_h = parseFloat(document.getElementById('new_h').value);
       var new_n = parseFloat(document.getElementById('new_n').value);
 
-      var cost_result = costs(1, 1);
-      var power1 = power(old_Q,old_h,old_n)
-      var power2 = power(new_Q,new_h,new_n)
+      var rate = 0.18
+
+      var consumption1 = (power(old_Q, old_h, old_n) * old_runtime * 0.7457).toFixed(2)
+      var consumption2 = (power(new_Q, new_h, new_n) * new_runtime * 0.7457).toFixed(2)
+      var cost1 = (consumption1 * rate).toFixed(2)
+      var cost2 = (consumption2 * rate).toFixed(2)
+      var cons_change = (consumption2 - consumption1).toFixed(2)
       var power_difference = powerdif(old_Q, old_h, old_n, new_Q, new_h, new_n);
+      var cost_result = (cost2 - cost1).toFixed(2)
 
 
       // Update the content of the <p> element with the id "result" to display the result
-      document.getElementById("power1").textContent = "Old Pump Power (hp): "+ power1;
-      document.getElementById("power2").textContent = "New Pump Power (hp): "+ power2;
-      document.getElementById("power_difference").textContent = "Change in Power (hp): " + power_difference;
+      document.getElementById("power1").textContent = "Old Pump Consumption (kWh): " + consumption1;
+      document.getElementById("power2").textContent = "New Pump Consumption (kWh): " + consumption2;
+      document.getElementById("cons_change").textContent = "Energy Savings (kWh): " + cons_change;
       document.getElementById("cost_result").textContent = "Change in Energy Costs ($): " + cost_result;
       // Use the result variable as needed
-      
+
       // Or perform other operations with the result variable
       // ...
     }
@@ -194,9 +199,10 @@
   </script>
   <div class="Results">
     <h1>Results</h1>
-    <p id="power1">Old Pump Power (hp):</p>
-    <p id="power2">New Pump Power (hp):</p>
-    <p id="power_difference">Change in Power (hp):</p>
+    <p id="power1">Old Pump Consumption (kWh):</p>
+    <p id="power2">New Pump Consumption (kWh):</p>
+    <p id="cons_change">Energy Savings (kWh):</p>
+
     <p id="cost_result">Change in Energy Costs ($):</p>
 
   </div>

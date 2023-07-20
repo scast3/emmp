@@ -30,20 +30,30 @@
       color: black;
     }
 
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+
     .old,
+    .new,
+    .results {
+      padding: 10px;
+    }
+
+    .old {
+      order: 1;
+      /* This makes .old appear before .new */
+    }
+
     .new {
-      float: left;
-      width: 50%;
-      /* Adjust width as needed */
+      order: 2;
+      /* This makes .new appear after .old */
     }
 
-    .clear {
-      clear: both;
-    }
-
-    .Results {
-      margin-top: 10px;
-      margin-bottom: 30px;
+    .results {
+      flex: 1;
+      /* This makes .results take up the available space on the right */
     }
 
     h1 {
@@ -134,7 +144,24 @@
   <button class="calcbutton" onclick="performCalculation(); console.log('logged');">Calculate
   </button>
 
-
+<table border="1">
+  <tr>
+    <th></th>
+    <th>Old Pump</th>
+    <th>New Pump</th>
+    <th>Change</th>
+  </tr>
+  <tr>
+    <td>Power Consumption (kWh)</td>
+    <td id="power1"></td>
+    <td id="power2"></td>
+    <td id="cons_change"></td>
+  </tr>
+  <tr>
+    <td>Change in Energy Costs ($/hr)</td>
+    <td colspan="3" id="cost_result"></td>
+  </tr>
+</table>
 
 
   <script>
@@ -148,7 +175,7 @@
       var new_h = parseFloat(document.getElementById('new_h').value);
       var new_n = parseFloat(document.getElementById('new_n').value);
 
-      var rate = 0.18
+      var rate = 0.18 // can change this later
 
       var consumption1 = (power(old_Q, old_h, old_n, old_runtime)).toFixed(2)
       var consumption2 = (power(new_Q, new_h, new_n, new_runtime)).toFixed(2)

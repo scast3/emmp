@@ -136,7 +136,7 @@
 
   </div>
 
-  <button class="calcbutton" onclick="performCalculation(); console.log('logged');">Calculate
+  <button class="calcbutton" onclick="performCalculation();">Calculate
   </button>
 
 
@@ -171,38 +171,17 @@
       document.getElementById("cost1").textContent = cost1;
       document.getElementById("cost2").textContent = cost2;
       document.getElementById("cost_result").textContent = cost_result;
-      // Use the result variable as needed
 
-      // Or perform other operations with the result variable
-      // ...
+
+
     }
-    document.getElementById("exportPdfBtn").addEventListener("click", function () {
-      // Generate PDF content
-      var pdfContent = {
-        content: [
-          'Your PDF content goes here'
-        ]
-      };
+    function exportTableToExcel() {
 
-      // Generate and download the PDF
-      pdfmake.createPdf(pdfContent).download("exported_data.pdf");
-    });
+      var wb = XLSX.utils.table_to_book(document.getElementsByTagName('table')[0]);
+      var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+      saveAs(new Blob([wbout], { type: 'application/octet-stream' }), 'table_data.xlsx');
+    }
 
-    document.getElementById("exportExcelBtn").addEventListener("click", function () {
-      // Generate Excel data
-      var excelData = [
-        ['Header 1', 'Header 2'],
-        ['Value 1', 'Value 2']
-      ];
-
-      var worksheet = XLSX.utils.aoa_to_sheet(excelData);
-      var workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-
-      // Generate and download the Excel file
-      var excelFile = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-      saveAs(new Blob([excelFile], { type: 'application/octet-stream' }), 'exported_data.xlsx');
-    });
   </script>
   <div class="Results">
     <h1>Results</h1>
@@ -221,16 +200,16 @@
       </tr>
       <tr>
         <td>Energy Costs ($/runtime)</td>
-        <td id = "cost1"></td>
-        <td id = "cost2"></td>
-        <td id = "cost_result"></td>
+        <td id="cost1"></td>
+        <td id="cost2"></td>
+        <td id="cost_result"></td>
 
       </tr>
     </table>
 
   </div>
-  <button id="exportPdfBtn">Export to PDF</button>
-  <button id="exportExcelBtn">Export to Excel</button>
+
+  <button onclick="exportTableToExcel()">Export to Excel</button>
 
 </body>
 

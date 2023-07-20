@@ -1,10 +1,10 @@
 
-function power(q, h, n) {
-    const density = 62.4;
-    const g = 32.2;
-    const power = (q * h * density * g) / (550 * n);
-    console.log(power);
-    return power;
+function power(q, h, n, t) {
+    const powerhp = (q*h)/(3960*(n/100));
+    const kwh = powerhp * 0.7456;
+
+    const energy = kwh*t
+    return energy;
 }
 
 function powerdif(flow1, head1, efficiency1, flow2, head2, efficiency2) {
@@ -20,8 +20,5 @@ function powerdif(flow1, head1, efficiency1, flow2, head2, efficiency2) {
     return powerDifference;
 }
 
-function costs(power,runtime){
-    
-    return 1;
-}
+
 

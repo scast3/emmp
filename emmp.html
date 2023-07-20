@@ -150,8 +150,8 @@
 
       var rate = 0.18
 
-      var consumption1 = (power(old_Q, old_h, old_n) * old_runtime * 0.7457).toFixed(2)
-      var consumption2 = (power(new_Q, new_h, new_n) * new_runtime * 0.7457).toFixed(2)
+      var consumption1 = (power(old_Q, old_h, old_n, old_runtime)).toFixed(2)
+      var consumption2 = (power(new_Q, new_h, new_n, new_runtime)).toFixed(2)
       var cost1 = (consumption1 * rate).toFixed(2)
       var cost2 = (consumption2 * rate).toFixed(2)
       var cons_change = (consumption2 - consumption1).toFixed(2)
@@ -163,7 +163,7 @@
       document.getElementById("power1").textContent = "Old Pump Consumption (kWh): " + consumption1;
       document.getElementById("power2").textContent = "New Pump Consumption (kWh): " + consumption2;
       document.getElementById("cons_change").textContent = "Energy Savings (kWh): " + cons_change;
-      document.getElementById("cost_result").textContent = "Change in Energy Costs ($): " + cost_result;
+      document.getElementById("cost_result").textContent = "Change in Energy Costs ($/hr): " + cost_result;
       // Use the result variable as needed
 
       // Or perform other operations with the result variable
@@ -203,7 +203,7 @@
     <p id="power2">New Pump Consumption (kWh):</p>
     <p id="cons_change">Energy Savings (kWh):</p>
 
-    <p id="cost_result">Change in Energy Costs ($):</p>
+    <p id="cost_result">Change in Energy Costs ($/hr):</p>
 
   </div>
   <button id="exportPdfBtn">Export to PDF</button>

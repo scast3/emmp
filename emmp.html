@@ -30,30 +30,20 @@
       color: black;
     }
 
-    .container {
-      display: flex;
-      justify-content: space-between;
-    }
-
     .old,
-    .new,
-    .results {
-      padding: 10px;
-    }
-
-    .old {
-      order: 1;
-      /* This makes .old appear before .new */
-    }
-
     .new {
-      order: 2;
-      /* This makes .new appear after .old */
+      float: left;
+      width: 50%;
+      /* Adjust width as needed */
     }
 
-    .results {
-      flex: 1;
-      /* This makes .results take up the available space on the right */
+    .clear {
+      clear: both;
+    }
+
+    .Results {
+      margin-top: 10px;
+      margin-bottom: 30px;
     }
 
     h1 {
@@ -66,7 +56,7 @@
     }
 
     .calcbutton {
-      margin-top: 10px;
+      margin-top: 20px;
       align-items: center;
       padding: 20px 40px;
       font-size: 24px;
@@ -74,6 +64,11 @@
       color: white;
       border: none;
       cursor: pointer;
+    }
+
+    table {
+      margin-top: 20px;
+      margin: 0 auto;
     }
   </style>
   <!-- <script src="export.js"></script> -->
@@ -144,24 +139,7 @@
   <button class="calcbutton" onclick="performCalculation(); console.log('logged');">Calculate
   </button>
 
-<table border="1">
-  <tr>
-    <th></th>
-    <th>Old Pump</th>
-    <th>New Pump</th>
-    <th>Change</th>
-  </tr>
-  <tr>
-    <td>Power Consumption (kWh)</td>
-    <td id="power1"></td>
-    <td id="power2"></td>
-    <td id="cons_change"></td>
-  </tr>
-  <tr>
-    <td>Change in Energy Costs ($/hr)</td>
-    <td colspan="3" id="cost_result"></td>
-  </tr>
-</table>
+
 
 
   <script>
@@ -187,10 +165,12 @@
 
 
       // Update the content of the <p> element with the id "result" to display the result
-      document.getElementById("power1").textContent = "Old Pump Consumption (kWh): " + consumption1;
-      document.getElementById("power2").textContent = "New Pump Consumption (kWh): " + consumption2;
-      document.getElementById("cons_change").textContent = "Energy Savings (kWh): " + cons_change;
-      document.getElementById("cost_result").textContent = "Change in Energy Costs ($/hr): " + cost_result;
+      document.getElementById("power1").textContent = consumption1;
+      document.getElementById("power2").textContent = consumption2;
+      document.getElementById("cons_change").textContent = cons_change;
+      document.getElementById("cost1").textContent = cost1;
+      document.getElementById("cost2").textContent = cost2;
+      document.getElementById("cost_result").textContent = cost_result;
       // Use the result variable as needed
 
       // Or perform other operations with the result variable
@@ -226,11 +206,27 @@
   </script>
   <div class="Results">
     <h1>Results</h1>
-    <p id="power1">Old Pump Consumption (kWh):</p>
-    <p id="power2">New Pump Consumption (kWh):</p>
-    <p id="cons_change">Energy Savings (kWh):</p>
+    <table border="1">
+      <tr>
+        <th></th>
+        <th>Old Pump</th>
+        <th>New Pump</th>
+        <th>Change</th>
+      </tr>
+      <tr>
+        <td>Power Consumption (kWh)</td>
+        <td id="power1"></td>
+        <td id="power2"></td>
+        <td id="cons_change"></td>
+      </tr>
+      <tr>
+        <td>Energy Costs ($/runtime)</td>
+        <td id = "cost1"></td>
+        <td id = "cost2"></td>
+        <td id = "cost_result"></td>
 
-    <p id="cost_result">Change in Energy Costs ($/hr):</p>
+      </tr>
+    </table>
 
   </div>
   <button id="exportPdfBtn">Export to PDF</button>
